@@ -129,13 +129,20 @@ measuring. Run PageSpeed Insights against the deployed URL for a reliable figure
 
 ## Brand assets
 
-Originals in `brand/` are untouched. Two near-identical 40-frame, 512px GIF exports
-existed on this machine; the newer one (Codex output, 22 Nov) was used. Both the GIF
-and PNG contain a faint 1px outline on their outermost pixels; the hero crops it at
-display time with CSS. The derived animation keeps the original frame timings
-(500 ms hold … 1.35 s lit frame) and loop count 1. Headless Chrome confirmed it stops
-on the lit frame and holds without looping (8 s sampled). Its real-time pacing in
-Safari and the Instagram app was not observed.
+Originals in `brand/` are untouched. The animated GIF is the export the founder
+confirmed on 24 Nov (512px, 40 frames, md5 `f4d61f34…`); it replaced an earlier,
+near-identical export that had a faint 1px outline on its canvas edge, so the
+display-time crop for that outline was removed. The still PNG has no outline.
+
+The GIF is used in two places: frames 0 to 22 as the hero animation (plays once,
+holds lit; reduced motion shows frame 22 as a still) and frame 0 (lamp off, laptop
+closed) as a still on the 404 page. The derived animation keeps the original frame
+timings (500 ms hold … 1.35 s lit frame) and loop count 1. Headless Chrome confirmed
+it stops on the lit frame and holds without looping (8 s sampled). Its real-time
+pacing in Safari and the Instagram app was not observed.
+
+404 page (24 Nov): returns HTTP 404 with `noindex`, 0 console errors at desktop and
+390px, and "See the work" leads to `/#work`.
 
 ## Not verified (needs a real device, an account or a decision)
 

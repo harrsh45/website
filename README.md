@@ -78,8 +78,10 @@ npm run check-links
 `brand/the-lumen-desk-logo.png` and `brand/the-lumen-desk-animated.gif` are the
 supplied originals and are never edited. `npm run brand` (Python 3 + Pillow) derives
 the web files from them: the hero animation (the GIF's first 23 frames, so it plays
-once and stops with the lamp lit), the lit still used for reduced motion, resized
-logos and the favicons.
+once and stops with the lamp lit), the lit still used for reduced motion, the
+lamp-off still used on the 404 page (`src/app/not-found.tsx`), resized logos and the
+favicons. To swap in a new export, replace the file in `brand/` (same name) and run
+`npm run brand`.
 
 ## Environment variables
 

@@ -45,11 +45,8 @@ here was guessed or filled in on your behalf.
   numbers were too noisy to rely on.
 - [ ] **Enquiry form:** decide whether you want it. Instagram and email already
   work. If yes, set up Resend (README) and send yourself a real test enquiry.
-- [ ] **Brand GIF:** two near-identical 40-frame GIF exports existed; the newer one
-  (Codex, 22 Nov) was used. Confirm it's the final one.
-- [ ] **Brand export (optional):** the supplied PNG and GIF have a faint 1px outline
-  around their canvas edge. The site hides it in the hero; a clean export would let
-  the footer, About tile and share image lose it too.
+- [x] **Brand GIF:** confirmed on 24 Nov. The file you sent is now
+  `brand/the-lumen-desk-animated.gif` (hero animation, and the 404 page's lamp-off frame).
 
 ## Optional additions (only if real)
 

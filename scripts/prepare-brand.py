@@ -15,6 +15,7 @@ Outputs:
                                         and holds on the fully lit frame
     public/brand/lamp-lit.webp|png      frame 22 (fully lit) as a still: the reduced
                                         motion / no-animation fallback
+    public/brand/lamp-off.webp          frame 0 (lamp off, laptop closed): the 404 page
     public/brand/logo-{256,512}.webp    the still logo, resized
     public/brand/logo.png               the still logo at 512px (for JSON-LD / email)
     src/app/icon.png, apple-icon.png, favicon.ico
@@ -51,12 +52,13 @@ frames[0].save(
     append_images=frames[1:],
     duration=durations,
     loop=1,          # WebP loop count: 1 = play once, then hold the last frame
-    lossless=True,   # keeps the flat brand colours exact (canvas #F4F3F0)
+    lossless=True,   # keeps the flat brand colours exact (canvas ~#F4F3F1)
     method=6,
 )
 lit = frames[LIT_FRAME]
 lit.save(os.path.join(OUT, "lamp-lit.webp"), lossless=True, method=6)
 lit.save(os.path.join(OUT, "lamp-lit.png"), optimize=True)
+frames[0].save(os.path.join(OUT, "lamp-off.webp"), lossless=True, method=6)
 
 # ---- still logo ---------------------------------------------------------------
 logo = Image.open(SRC_PNG).convert("RGB")  # opaque canvas; alpha channel is all 255
