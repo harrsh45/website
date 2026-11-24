@@ -11,12 +11,13 @@ export default function Hero({ phones }: { phones: Project[] }) {
     <section id="top" className="hero ground-paper" data-sc-act="flow" aria-labelledby="hero-title">
       <div className="wrap hero__grid">
         <div className="hero__copy">
-          {/* The supplied logo animation (laptop opens, lamp switches on), played once and held
-              lit. Reduced motion gets the lit frame as a still. Canvas colour matches the page. */}
+          {/* The supplied logo animation, looping as in the original GIF (laptop opens, lamp
+              switches on, light goes off, repeat). Reduced motion gets the lit frame as a still.
+              Canvas colour matches the page. */}
           <picture className="hero__lamp">
             <source srcSet="/brand/lamp-lit.webp" media="(prefers-reduced-motion: reduce)" type="image/webp" />
             <img
-              src="/brand/lamp-switch-on.webp"
+              src="/brand/lamp-loop.webp"
               width={512}
               height={512}
               alt="The Lumen Desk logo: a desk lamp switching on over a laptop"

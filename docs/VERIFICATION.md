@@ -85,7 +85,7 @@ skipped (ffmpeg is not installed here); sheets were built with sharp instead.
 encode scrub video; this build has none). `KIE_AI_API_KEY` not set (no generated
 assets; nothing was purchased).
 
-## Interactions (`scripts/verify-interactions.mjs`): 20/20 (re-run 24 Nov with Lenis)
+## Interactions (`scripts/verify-interactions.mjs`): 28/28 (re-run 24 Nov)
 
 Keyboard: first 14 tab stops visible, in order, with a focus outline; content inside
 fade-in groups is forced visible when focused. "Explore the websites", the skip link
@@ -103,6 +103,17 @@ Touch scrolling is left native by design; it was not exercised on a real phone.
 
 Fixed along the way: project-index jumps previously landed ~70px low because the
 pieces carried a scroll margin on top of the page's scroll padding.
+
+Email links: on a computer, "Email me" (and the address links in the close and the
+footer) open a menu with the email app, Gmail and Outlook compose links (all to
+harsh@thelumendesk.com, subject "Website enquiry") and Copy address; focus moves into
+the menu, Copy puts the address on the clipboard, Escape closes it and returns focus,
+and the menu is never clipped by the closing screen. On a phone the button stays a
+one-tap `mailto:` link (no menu, default action not cancelled). Reported issue
+("clicking email opens nothing") traced on 24 Nov: the links were correct and no
+script cancelled the click; Windows on the test PC hands `mailto:` to Chrome, which
+had no email handler, so nothing opened. Gmail/Outlook compose pages were not opened
+during testing (they need a signed-in account).
 
 ## Enquiry form (`scripts/verify-form.mjs`): 13/13
 
@@ -144,12 +155,13 @@ confirmed on 24 Nov (512px, 40 frames, md5 `f4d61f34…`); it replaced an earlie
 near-identical export that had a faint 1px outline on its canvas edge, so the
 display-time crop for that outline was removed. The still PNG has no outline.
 
-The GIF is used in two places: frames 0 to 22 as the hero animation (plays once,
-holds lit; reduced motion shows frame 22 as a still) and frame 0 (lamp off, laptop
-closed) as a still on the 404 page. The derived animation keeps the original frame
-timings (500 ms hold … 1.35 s lit frame) and loop count 1. Headless Chrome confirmed
-it stops on the lit frame and holds without looping (8 s sampled). Its real-time
-pacing in Safari and the Instagram app was not observed.
+The GIF is used in two places: all 40 frames as the hero animation, looping forever
+like the original (changed on 24 Nov at the founder's request; it was previously
+play-once), with frame 22 (fully lit) as a still under reduced motion; and frame 0
+(lamp off, laptop closed) as a still on the 404 page. The derived animation keeps the
+original frame timings (3.85 s cycle) with loop count 0. Headless Chrome confirmed it
+keeps cycling (lit, off, lit, off, sampled over ~9 s). Its real-time pacing in Safari
+and the Instagram app was not observed.
 
 404 page (24 Nov): returns HTTP 404 with `noindex`, 0 console errors at desktop and
 390px, and "See the work" leads to `/#work`.

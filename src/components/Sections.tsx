@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { site } from "@/data/site";
+import EmailLink from "./EmailLink";
 
 const PROMISES = [
   {
@@ -202,9 +203,7 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href={`mailto:${site.email}`} data-track="click_contact" data-track-id="footer-email">
-                {site.email}
-              </a>
+              <EmailLink trackId="footer-email">{site.email}</EmailLink>
             </li>
           </ul>
         </div>

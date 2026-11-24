@@ -485,6 +485,33 @@ html.lamp-armed .desk__phone--right .veil { animation-delay: 1.44s; }
 .form-status--error { background: rgb(255 120 100 / 0.12); color: #ffc3b8; }
 @media (max-width: 860px) { .enquiry { grid-template-columns: minmax(0, 1fr); } }
 
+/* ------------------------------------------------- email link menu --
+   On computers an email link opens these options (see EmailLink.tsx). Opens above
+   its trigger: the closing screen clips anything that overflows it. */
+/* Inline, so an address inside a sentence stays an ordinary text link. */
+.email-link { position: relative; display: inline; }
+.email-link__panel {
+  position: absolute; left: 0; bottom: calc(100% + 8px); z-index: 30;
+  display: grid; min-width: 15.5rem; padding: 0.4rem;
+  background: var(--paper); color: var(--navy); --focus: var(--navy);
+  border: 1px solid rgb(19 34 55 / 0.14); border-radius: var(--r); box-shadow: var(--sc-e3);
+  text-align: left; white-space: nowrap;
+}
+.email-link--below .email-link__panel { bottom: auto; top: calc(100% + 8px); }
+.email-link .email-link__panel :is(a, button) {
+  display: flex; align-items: center; min-height: 44px; min-width: 0; padding: 0 0.85rem;
+  border: 0; border-radius: var(--r-sm); background: none; color: var(--navy);
+  font: inherit; font-size: 0.95rem; font-weight: 500; text-decoration: none; cursor: pointer;
+  transition: background-color 140ms var(--sc-ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .email-link .email-link__panel :is(a, button):hover { background: rgb(19 34 55 / 0.07); }
+}
+.email-link .email-link__address {
+  margin-top: 0.3rem; padding: 0.55rem 0.85rem 0.35rem; border-top: 1px solid rgb(19 34 55 / 0.1);
+  font-size: 0.8rem; color: var(--soft-on-paper);
+}
+
 /* ------------------------------------------------------------- 404 -- */
 .lost { min-height: 100svh; display: grid; align-items: center; padding-block: clamp(2rem, 6vw, 4rem); }
 .lost__inner { display: grid; justify-items: start; gap: 1rem; max-width: 46rem; }

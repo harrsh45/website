@@ -14,6 +14,7 @@
  */
 import fs from "node:fs";
 import { chromium } from "playwright-core";
+import sharp from "sharp";
 
 const argv = process.argv.slice(2);
 const URL = argv.includes("--url") ? argv[argv.indexOf("--url") + 1] : "http://localhost:4600";
@@ -178,6 +179,112 @@ const browser = await chromium.launch({ executablePath: CHROME, headless: true }
   const aboutTop = await page.evaluate(() => document.getElementById("about").getBoundingClientRect().top);
   ok("menu link closes menu and reaches its section", !(await navVisible()) && Math.abs(aboutTop) < 120, `#about top at ${Math.round(aboutTop)}px`);
   await ctx.close();
+}
+
+// --------------------------------------------------- hero logo keeps looping --
+{
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.goto(URL, { waitUntil: "load" });
+  const states = [];
+  for (let i = 0; i < 30; i++) {
+    const buf = await (await page.$(".hero__lamp img")).screenshot();
+    const { data, info } = await sharp(buf).raw().toBuffer({ resolveWithObject: true });
+    // the laptop screen area of the artwork: warm when lit, canvas-coloured when off
+    const x = Math.round(info.width * 0.55), y = Math.round(info.height * 0.6), k = (y * info.width + x) * info.channels;
+    states.push(data[k + 2] < 200 ? "lit" : "off"); // lit pixels have little blue
+    await page.waitForTimeout(300);
+  }
+  const s = states.join("");
+  ok("hero logo animation keeps looping", /lit(off)+lit/.test(s), `observed ${states.filter((v, i) => v !== states[i - 1]).join(" > ")}`);
+  await page.close();
+}
+
+// ------------------------------------------------------------- email links --
+{
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  await ctx.grantPermissions(["clipboard-read", "clipboard-write"], { origin: URL });
+  const page = await ctx.newPage();
+  await page.goto(URL, { waitUntil: "load" });
+  await page.waitForTimeout(600);
+  const btn = page.locator(".contact__actions a", { hasText: "Email me" });
+  await btn.scrollIntoViewIfNeeded();
+  await settle(page);
+  await btn.click();
+  await page.waitForTimeout(250);
+  const menu = await page.evaluate(() => {
+    const panel = document.querySelector(".contact__actions .email-link__panel");
+    if (!panel) return null;
+    const screen = document.querySelector(".contact__screen").getBoundingClientRect();
+    const r = panel.getBoundingClientRect();
+    return {
+      expanded: document.querySelector(".contact__actions [aria-expanded]")?.getAttribute("aria-expanded"),
+      items: [...panel.querySelectorAll("a,button")].map((e) => `${e.textContent.trim()}=${e.getAttribute("href") || "button"}`),
+      focusInside: panel.contains(document.activeElement),
+      insideScreen: r.top >= screen.top && r.bottom <= screen.bottom && r.left >= screen.left && r.right <= screen.right,
+    };
+  });
+  ok(
+    "computer: 'Email me' opens email options",
+    menu && menu.expanded === "true" && menu.focusInside && menu.items.length === 4,
+    menu ? menu.items.join(" | ") : "no menu",
+  );
+  ok(
+    "email options point at the studio address",
+    menu &&
+      menu.items[0].includes("mailto:harsh@thelumendesk.com") &&
+      menu.items[1].includes("mail.google.com") && menu.items[1].includes("harsh%40thelumendesk.com") &&
+      menu.items[2].includes("outlook.live.com") && menu.items[2].includes("harsh%40thelumendesk.com"),
+  );
+  ok("email options are fully visible (not clipped by the screen)", menu?.insideScreen === true);
+  await page.click(".contact__actions .email-link__panel >> text=Copy address");
+  await page.waitForTimeout(200);
+  const clip = await page.evaluate(() => navigator.clipboard.readText());
+  ok("'Copy address' copies the email", clip === "harsh@thelumendesk.com", JSON.stringify(clip));
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(150);
+  const closed = await page.evaluate(() => ({
+    gone: !document.querySelector(".contact__actions .email-link__panel"),
+    focusBack: document.activeElement?.textContent?.trim() === "Email me",
+  }));
+  ok("Escape closes the options and returns focus", closed.gone && closed.focusBack);
+
+  const footer = page.locator(".site-footer .email-link > a");
+  await footer.scrollIntoViewIfNeeded();
+  await settle(page);
+  await footer.click();
+  await page.waitForTimeout(250);
+  const fr = await page.evaluate(() => {
+    const p = document.querySelector(".site-footer .email-link__panel");
+    if (!p) return null;
+    const r = p.getBoundingClientRect();
+    return { visible: r.top >= 0 && r.bottom <= innerHeight && r.right <= innerWidth };
+  });
+  ok("footer email link opens options on screen", fr?.visible === true);
+  await ctx.close();
+
+  // Phone: a plain mailto tap (no menu, default action not cancelled).
+  const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  const pp = await phone.newPage();
+  await pp.goto(URL, { waitUntil: "load" });
+  await pp.waitForTimeout(600);
+  await pp.evaluate(() => {
+    window.__prevented = null;
+    document.addEventListener("click", (e) => {
+      if (e.target.closest(".email-link")) setTimeout(() => { window.__prevented = e.defaultPrevented; }, 0);
+    }, true);
+  });
+  const pbtn = pp.locator(".contact__actions a", { hasText: "Email me" });
+  await pbtn.scrollIntoViewIfNeeded();
+  const attrs = await pbtn.evaluate((a) => ({ href: a.getAttribute("href"), expanded: a.getAttribute("aria-expanded") }));
+  await pbtn.tap({ noWaitAfter: true }).catch(() => {});
+  await pp.waitForTimeout(300);
+  const phoneState = await pp.evaluate(() => ({ prevented: window.__prevented, panel: Boolean(document.querySelector(".email-link__panel")) }));
+  ok(
+    "phone: 'Email me' stays a one-tap mailto link",
+    attrs.href.startsWith("mailto:harsh@thelumendesk.com") && attrs.expanded === null && phoneState.prevented === false && !phoneState.panel,
+    `href ${attrs.href}, defaultPrevented ${phoneState.prevented}, menu shown ${phoneState.panel}`,
+  );
+  await phone.close();
 }
 
 // ---------------------------------------------------------- reduced motion --

@@ -77,11 +77,20 @@ npm run check-links
 
 `brand/the-lumen-desk-logo.png` and `brand/the-lumen-desk-animated.gif` are the
 supplied originals and are never edited. `npm run brand` (Python 3 + Pillow) derives
-the web files from them: the hero animation (the GIF's first 23 frames, so it plays
-once and stops with the lamp lit), the lit still used for reduced motion, the
-lamp-off still used on the 404 page (`src/app/not-found.tsx`), resized logos and the
-favicons. To swap in a new export, replace the file in `brand/` (same name) and run
-`npm run brand`.
+the web files from them: the hero animation (all 40 frames, looping like the GIF),
+the lit still used for reduced motion, the lamp-off still used on the 404 page
+(`src/app/not-found.tsx`), resized logos and the favicons. To swap in a new export,
+replace the file in `brand/` (same name) and run `npm run brand`.
+
+## Email links
+
+Every email link uses `src/components/EmailLink.tsx`. On phones it is a normal
+one-tap `mailto:` link (phones always have a mail app). On computers a `mailto:` link
+silently does nothing when no email app is set up (common for people who only use
+webmail, and on Windows when Chrome is the default `mailto` handler with no webmail
+registered), so there it opens a small menu instead: **Open your email app**,
+**Write in Gmail**, **Write in Outlook** and **Copy address**. Without JavaScript it
+is a plain `mailto:` link.
 
 ## Environment variables
 

@@ -1,4 +1,5 @@
-import { mailto, site } from "@/data/site";
+import { site } from "@/data/site";
+import EmailLink from "./EmailLink";
 import EnquiryForm from "./EnquiryForm";
 import { Instagram, Lock, Mail } from "./icons";
 
@@ -39,18 +40,13 @@ export default function Contact({ formEnabled }: { formEnabled: boolean }) {
                   <Instagram />
                   Message on Instagram
                 </a>
-                <a
-                  className="btn btn--line"
-                  href={mailto("Website enquiry")}
-                  data-track="click_contact"
-                  data-track-id="contact-email"
-                >
+                <EmailLink className="btn btn--line" trackId="contact-email">
                   <Mail />
                   Email me
-                </a>
+                </EmailLink>
               </div>
               <p className="contact__email">
-                <a href={`mailto:${site.email}`}>{site.email}</a> &middot; Instagram{" "}
+                <EmailLink trackId="contact-email-address">{site.email}</EmailLink> &middot; Instagram{" "}
                 <a href={site.instagram.url} target="_blank" rel="noopener noreferrer">
                   {site.instagram.handle}
                 </a>

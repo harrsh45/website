@@ -135,7 +135,7 @@ scroll. It is short (about 0.5 viewport-heights) and always holds the section he
 
 | Act | Beat | Device | Why this one |
 |---|---|---|---|
-| 1 Hero | Recognition | `flow` + `parallax` (three phone planes and a glow plane) + play-once brand animation | Depth without pinning: real screenshots at different rates, no wait before the work |
+| 1 Hero | Recognition | `flow` + `parallax` (three phone planes and a glow plane) + looping brand animation (play-once until 24 Nov; looping at the founder's request) | Depth without pinning: real screenshots at different rates, no wait before the work |
 | 2 Work intro | Anticipation | `flow` + `in` | The quiet before the peak: just words and an index |
 | 3 to 4 Featured | Proof | bespoke lamp-on + `in` on labels | The signature move: the work is lit by the hand that scrolls |
 | 5 More to explore | Range | lamp-on (small) in a two-up grid | Same light, faster rhythm, smaller objects |

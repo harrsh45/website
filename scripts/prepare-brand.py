@@ -10,9 +10,8 @@ Inputs (supplied by the founder, never edited):
     brand/the-lumen-desk-animated.gif   512x512, 40 frames, ~3.85 s loop
 
 Outputs:
-    public/brand/lamp-switch-on.webp    frames 0-22 of the GIF (laptop opens, the
-                                        lamp light switches on), lossless, plays ONCE
-                                        and holds on the fully lit frame
+    public/brand/lamp-loop.webp         all 40 frames of the GIF with its own timings,
+                                        lossless, looping forever (the hero animation)
     public/brand/lamp-lit.webp|png      frame 22 (fully lit) as a still: the reduced
                                         motion / no-animation fallback
     public/brand/lamp-off.webp          frame 0 (lamp off, laptop closed): the 404 page
@@ -35,26 +34,29 @@ LIT_FRAME = 22  # the frame the original animation holds for 1.35 s, fully lit
 os.makedirs(OUT, exist_ok=True)
 os.makedirs(APP, exist_ok=True)
 
-# ---- animation: play once, end lit -----------------------------------------
+# ---- animation: the whole GIF, looping -------------------------------------
 gif = Image.open(SRC_GIF)
 if gif.n_frames <= LIT_FRAME:
     sys.exit(f"expected at least {LIT_FRAME + 1} frames, got {gif.n_frames}")
 
 frames, durations = [], []
-for i in range(LIT_FRAME + 1):
+for i in range(gif.n_frames):
     gif.seek(i)
     frames.append(gif.convert("RGB"))
     durations.append(gif.info.get("duration", 50))
 
 frames[0].save(
-    os.path.join(OUT, "lamp-switch-on.webp"),
+    os.path.join(OUT, "lamp-loop.webp"),
     save_all=True,
     append_images=frames[1:],
     duration=durations,
-    loop=1,          # WebP loop count: 1 = play once, then hold the last frame
+    loop=0,          # WebP loop count: 0 = repeat forever, like the original GIF
     lossless=True,   # keeps the flat brand colours exact (canvas ~#F4F3F1)
     method=6,
 )
+stale = os.path.join(OUT, "lamp-switch-on.webp")  # the earlier play-once version
+if os.path.exists(stale):
+    os.remove(stale)
 lit = frames[LIT_FRAME]
 lit.save(os.path.join(OUT, "lamp-lit.webp"), lossless=True, method=6)
 lit.save(os.path.join(OUT, "lamp-lit.png"), optimize=True)

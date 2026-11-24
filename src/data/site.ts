@@ -24,6 +24,3 @@ export const site = {
    */
   requireRightsClearance: process.env.NEXT_PUBLIC_REQUIRE_RIGHTS_CLEARANCE === "true",
 } as const;
-
-export const mailto = (subject?: string) =>
-  `mailto:${site.email}${subject ? `?subject=${encodeURIComponent(subject)}` : ""}`;
