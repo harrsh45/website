@@ -1,0 +1,248 @@
+{
+  "capturedAt": "2026-11-22T10:16:33.107Z",
+  "projects": {
+    "sarah-ollivierre-beauty": {
+      "url": "https://sarahollivierrebeauty.co.uk/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://sarahollivierrebeauty.co.uk/",
+        "title": "Nail Salon in Brixton | BIAB, Russian Manicure & PMU | Sarah Ollivierre Beauty",
+        "files": [
+          "sarah-ollivierre-beauty-desktop.webp",
+          "sarah-ollivierre-beauty-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://sarahollivierrebeauty.co.uk/",
+        "title": "Nail Salon in Brixton | BIAB, Russian Manicure & PMU | Sarah Ollivierre Beauty",
+        "files": [
+          "sarah-ollivierre-beauty-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "bels-beauty-studio": {
+      "url": "https://bel-s-beauty-studio.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://bel-s-beauty-studio.vercel.app/",
+        "title": "Bel's Beauty Studio | Nails, Brows & Lashes in Northfield",
+        "files": [
+          "bels-beauty-studio-desktop.webp",
+          "bels-beauty-studio-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://bel-s-beauty-studio.vercel.app/",
+        "title": "Bel's Beauty Studio | Nails, Brows & Lashes in Northfield",
+        "files": [
+          "bels-beauty-studio-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "beauty-by-jayde": {
+      "url": "https://beautybyjayde.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://beautybyjayde.vercel.app/",
+        "title": "Beauty by Jayde | Beauty Therapist in Dunedin",
+        "files": [
+          "beauty-by-jayde-desktop.webp",
+          "beauty-by-jayde-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://beautybyjayde.vercel.app/",
+        "title": "Beauty by Jayde | Beauty Therapist in Dunedin",
+        "files": [
+          "beauty-by-jayde-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "nails-and-beauty-by-nikki": {
+      "url": "https://nails-and-beauty-by-nikki.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://nails-and-beauty-by-nikki.vercel.app/",
+        "title": "Nails And Beauty By Nikki | Russian Manicure & Builder Gel Houston",
+        "files": [
+          "nails-and-beauty-by-nikki-desktop.webp",
+          "nails-and-beauty-by-nikki-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://nails-and-beauty-by-nikki.vercel.app/",
+        "title": "Nails And Beauty By Nikki | Russian Manicure & Builder Gel Houston",
+        "files": [
+          "nails-and-beauty-by-nikki-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "the-beauty-surgery": {
+      "url": "https://thebeautysurgery.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://thebeautysurgery.vercel.app/",
+        "title": "The Beauty Surgery | Beauty Salon in Barrowford & Nelson",
+        "files": [
+          "the-beauty-surgery-desktop.webp",
+          "the-beauty-surgery-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://thebeautysurgery.vercel.app/",
+        "title": "The Beauty Surgery | Beauty Salon in Barrowford & Nelson",
+        "files": [
+          "the-beauty-surgery-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "kimberly-nails": {
+      "url": "https://kimberlynails.vercel.app/en",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://kimberlynails.vercel.app/en",
+        "title": "Kimberly._.nailss · Nails, lashes & brows in Chicago",
+        "files": [
+          "kimberly-nails-desktop.webp",
+          "kimberly-nails-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://kimberlynails.vercel.app/en",
+        "title": "Kimberly._.nailss · Nails, lashes & brows in Chicago",
+        "files": [
+          "kimberly-nails-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "perfection-beauty-and-body": {
+      "url": "https://pbb-nu.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://pbb-nu.vercel.app/",
+        "title": "Lash Extensions & Lash Lifts in Woolston, Christchurch | Perfection Beauty & Body",
+        "files": [
+          "perfection-beauty-and-body-desktop.webp",
+          "perfection-beauty-and-body-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://pbb-nu.vercel.app/",
+        "title": "Lash Extensions & Lash Lifts in Woolston, Christchurch | Perfection Beauty & Body",
+        "files": [
+          "perfection-beauty-and-body-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "lisvel-silvestre": {
+      "url": "https://lisvelsilvestre.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://lisvelsilvestre.vercel.app/",
+        "title": "Lisvel Silvestre | Bronx Hair Stylist & Nail Technician",
+        "files": [
+          "lisvel-silvestre-desktop.webp",
+          "lisvel-silvestre-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://lisvelsilvestre.vercel.app/",
+        "title": "Lisvel Silvestre | Bronx Hair Stylist & Nail Technician",
+        "files": [
+          "lisvel-silvestre-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "vela-studio": {
+      "url": "https://photographers-seven.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://photographers-seven.vercel.app/",
+        "title": "Wedding & Editorial Photographer in Lisbon — Vela Studio",
+        "files": [
+          "vela-studio-desktop.webp",
+          "vela-studio-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://photographers-seven.vercel.app/",
+        "title": "Wedding & Editorial Photographer in Lisbon — Vela Studio",
+        "files": [
+          "vela-studio-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "ironhaus": {
+      "url": "https://gym-livid-rho.vercel.app/",
+      "desktop": {
+        "status": 200,
+        "finalUrl": "https://gym-livid-rho.vercel.app/",
+        "title": "Gym in Indiranagar, Bengaluru — 24/7 Strength, Pool & Recovery",
+        "files": [
+          "ironhaus-desktop.webp",
+          "ironhaus-desktop-mid.webp"
+        ],
+        "errors": []
+      },
+      "mobile": {
+        "status": 200,
+        "finalUrl": "https://gym-livid-rho.vercel.app/",
+        "title": "Gym in Indiranagar, Bengaluru — 24/7 Strength, Pool & Recovery",
+        "files": [
+          "ironhaus-mobile.webp"
+        ],
+        "errors": []
+      }
+    },
+    "kapiti-barbers": {
+      "url": "https://kapitibarbers.vercel.app/",
+      "desktop": {
+        "status": 404,
+        "finalUrl": "https://kapitibarbers.vercel.app/",
+        "title": "404: NOT_FOUND",
+        "files": [],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 ()",
+          "CAPTURE FAILED: HTTP 404"
+        ]
+      },
+      "mobile": {
+        "status": 404,
+        "finalUrl": "https://kapitibarbers.vercel.app/",
+        "title": "404: NOT_FOUND",
+        "files": [],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 ()",
+          "CAPTURE FAILED: HTTP 404"
+        ]
+      }
+    }
+  }
+}
