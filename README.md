@@ -172,3 +172,20 @@ Output goes to `scrollcraft/builds/thelumendesk/lab/` (git-ignored).
   "lamp switches on" behaviour is page code in `src/components/LampLight.tsx`.
 - Fail-safe by design: with JavaScript off, a slow script or reduced motion, every
   section is visible and every project is fully lit.
+
+## Smooth scrolling (Lenis)
+
+[Lenis](https://github.com/darkroomengineering/lenis) 1.3.27 (pinned exactly) smooths
+mouse-wheel and trackpad scrolling; see `src/components/SmoothScroll.tsx`.
+
+- Touch scrolling is left native, so phones and Instagram's in-app browser behave
+  exactly as before.
+- It is not started at all when the visitor has asked for reduced motion.
+- Same-page links (`#work`, `#contact`, the project index, the skip link) glide to
+  their target just below the sticky header, update the URL, and move keyboard focus
+  there. The header offset comes from `scroll-padding-top` in `globals.css`.
+- Scrollable areas inside the page (the enquiry textarea, the mobile project index)
+  scroll on their own (`allowNestedScroll`).
+- To tune the feel, pass `lerp` (default `0.1`; higher is snappier) or `duration`
+  to the `new Lenis({...})` call. To remove it, delete `<SmoothScroll />` from
+  `src/app/page.tsx`.

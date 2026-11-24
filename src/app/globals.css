@@ -42,6 +42,11 @@
 
 /* ------------------------------------------------------------ base -- */
 html { scroll-padding-top: calc(var(--header-h) + 12px); }
+/* While Lenis runs it is the only smoothing: no CSS smooth scrolling on top of it. */
+html.lenis { scroll-behavior: auto; }
+/* Sections that receive focus after an in-page link (for keyboard and screen-reader
+   users) don't need a ring around the whole section. */
+:is(section, li, main)[tabindex="-1"]:focus { outline: none; }
 body { min-height: 100svh; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 h1, h2, h3, p, ol, ul, figure { margin: 0; }
@@ -302,7 +307,7 @@ html.lamp-armed .desk__phone--right .veil { animation-delay: 1.44s; }
 
 /* A piece = one project: stage (lit screens) + label. */
 .pieces { display: grid; gap: clamp(3.25rem, 6.5vw, 6rem); margin-top: clamp(2.5rem, 5vw, 4.5rem); }
-.piece { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2.4vw, 2.5rem); row-gap: 2rem; align-items: center; scroll-margin-top: calc(var(--header-h) + 8px); }
+.piece { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2.4vw, 2.5rem); row-gap: 2rem; align-items: center; }
 .piece__stage { display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); align-items: start; padding-top: var(--cone-h); padding-bottom: 6%; }
 .piece__browser { position: relative; grid-row: 1; }
 .piece__phone { position: relative; grid-row: 1; align-self: end; z-index: 3; translate: 0 14%; }
@@ -361,7 +366,7 @@ html.lamp-armed .desk__phone--right .veil { animation-delay: 1.44s; }
 .more__head { display: grid; gap: 0.75rem; max-width: 40rem; }
 .more__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.75rem, 5vw, 4.5rem) clamp(1.5rem, 3.5vw, 3.5rem); margin-top: clamp(2rem, 4vw, 3rem); }
 .more__grid > li:nth-child(even) { margin-top: clamp(0px, 5vw, 4rem); }
-.compact { display: grid; gap: 1.4rem; scroll-margin-top: calc(var(--header-h) + 8px); }
+.compact { display: grid; gap: 1.4rem; }
 .compact__stage { --cone-h: clamp(48px, 6vw, 96px); padding-top: var(--cone-h); position: relative; }
 .compact__frame { position: relative; }
 .compact .label__desc { font-size: 0.97rem; }

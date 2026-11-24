@@ -3,6 +3,7 @@ import Contact from "@/components/Contact";
 import Hero from "@/components/Hero";
 import LampLight from "@/components/LampLight";
 import ScrollcraftMount from "@/components/ScrollcraftMount";
+import SmoothScroll from "@/components/SmoothScroll";
 import { About, Faq, Process, Services, SiteFooter } from "@/components/Sections";
 import SiteHeader from "@/components/SiteHeader";
 import Work from "@/components/Work";
@@ -39,6 +40,7 @@ export default function Home() {
       </main>
       <SiteFooter />
       <ScrollcraftMount />
+      <SmoothScroll />
       <LampLight />
       <Analytics />
     </>

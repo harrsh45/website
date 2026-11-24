@@ -1,6 +1,6 @@
 # Verification report
 
-Build: Next.js 16.4.6 production build (`next build` + `next start`), 22 Nov 2026.
+Build: Next.js 16.4.6 production build (smooth scrolling: Lenis 1.3.27) (`next build` + `next start`), 22 Nov 2026.
 All checks below ran against the final build unless marked otherwise.
 Evidence (frames, contact sheets, JSON reports) is in `scrollcraft/builds/thelumendesk/lab/`
 (git-ignored; regenerate with the scripts in the README).
@@ -85,14 +85,24 @@ skipped (ffmpeg is not installed here); sheets were built with sharp instead.
 encode scrub video; this build has none). `KIE_AI_API_KEY` not set (no generated
 assets; nothing was purchased).
 
-## Interactions (`scripts/verify-interactions.mjs`): 15/15
+## Interactions (`scripts/verify-interactions.mjs`): 20/20 (re-run 24 Nov with Lenis)
 
 Keyboard: first 14 tab stops visible, in order, with a focus outline; content inside
-fade-in groups is forced visible when focused. "Explore the websites" lands on the
-Work section. Mobile menu opens, reports `aria-expanded`, closes on Escape and after
-choosing a link, and the link reaches its section. FAQ items open and close.
-Instagram and email links present. With no form configured, `POST /api/enquiry`
-answers `503 not_configured` and no form is shown.
+fade-in groups is forced visible when focused. "Explore the websites", the skip link
+and the project index all land their target exactly 12px below the sticky header,
+update the URL hash and move keyboard focus to the target. Mobile menu opens, reports
+`aria-expanded`, closes on Escape and after choosing a link, and the link reaches its
+section. FAQ items open and close. Instagram and email links present. With no form
+configured, `POST /api/enquiry` answers `503 not_configured` and no form is shown.
+
+Smooth scrolling (Lenis 1.3.27): an 800px wheel turn glides through 14 distinct
+positions and ends exactly 800px down. Scrolling the whole page by mouse wheel reaches
+the bottom with every project lit (11/11), every fade-in revealed (22/22) and no
+console errors. Under reduced motion Lenis is not started and anchors jump natively.
+Touch scrolling is left native by design; it was not exercised on a real phone.
+
+Fixed along the way: project-index jumps previously landed ~70px low because the
+pieces carried a scroll margin on top of the page's scroll padding.
 
 ## Enquiry form (`scripts/verify-form.mjs`): 13/13
 

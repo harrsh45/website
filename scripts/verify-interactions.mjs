@@ -74,10 +74,47 @@ const browser = await chromium.launch({ executablePath: CHROME, headless: true }
   ok("keyboard: focus outline drawn", stops.every((s) => s.outline));
 
   await page.goto(URL, { waitUntil: "load" });
+  await page.waitForTimeout(500);
+  const headerH = await page.evaluate(() => document.querySelector(".site-header").getBoundingClientRect().height);
   await page.click("text=Explore the websites");
   await settle(page);
-  const workTop = await page.evaluate(() => document.getElementById("work").getBoundingClientRect().top);
-  ok("hero CTA jumps to the work", Math.abs(workTop) < 120, `#work top at ${Math.round(workTop)}px`);
+  const afterCta = await page.evaluate(() => ({
+    top: document.getElementById("work").getBoundingClientRect().top,
+    hash: location.hash,
+    focus: document.activeElement?.id,
+  }));
+  ok("hero CTA glides to the work, just below the header", Math.abs(afterCta.top - (headerH + 12)) <= 4, `#work top at ${Math.round(afterCta.top)}px (header ${Math.round(headerH)}px)`);
+  ok("in-page link updates the URL and moves focus", afterCta.hash === "#work" && afterCta.focus === "work", `hash ${afterCta.hash}, focus #${afterCta.focus}`);
+
+  // Project index jump lands the project just below the header too (no double offset).
+  await page.click(".index >> text=Kimberly Nails");
+  await settle(page);
+  const kimTop = await page.evaluate(() => document.getElementById("work-kimberly-nails").getBoundingClientRect().top);
+  ok("project index jump lands just below the header", Math.abs(kimTop - (headerH + 12)) <= 4, `piece top at ${Math.round(kimTop)}px`);
+
+  // Lenis: the wheel is smoothed (several intermediate positions), and it ends where it should.
+  await page.goto(URL, { waitUntil: "load" });
+  await page.waitForTimeout(500);
+  const lenisOn = await page.evaluate(() => document.documentElement.classList.contains("lenis"));
+  await page.mouse.move(700, 450);
+  const y0 = await page.evaluate(() => scrollY);
+  await page.mouse.wheel(0, 800);
+  const samples = [];
+  for (let i = 0; i < 14; i++) {
+    samples.push(await page.evaluate(() => Math.round(scrollY)));
+    await page.waitForTimeout(40);
+  }
+  const yEnd = await settle(page);
+  const distinct = new Set(samples).size;
+  ok("Lenis smooths wheel scrolling", lenisOn && distinct >= 5 && Math.abs(yEnd - y0 - 800) <= 2, `lenis=${lenisOn}, ${distinct} distinct positions while gliding, moved ${Math.round(yEnd - y0)}px for an 800px wheel`);
+
+  // Skip link: keyboard user lands in the work section with focus there.
+  await page.goto(URL, { waitUntil: "load" });
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Enter");
+  await settle(page);
+  const skip = await page.evaluate(() => ({ focus: document.activeElement?.id, top: document.getElementById("work").getBoundingClientRect().top }));
+  ok("skip link moves focus and view to the work", skip.focus === "work" && Math.abs(skip.top - (headerH + 12)) <= 4, `focus #${skip.focus}, #work top ${Math.round(skip.top)}px`);
 
   const links = await page.$$eval("a[href^='http']", (as) =>
     as.map((a) => ({ href: a.getAttribute("href"), target: a.target, rel: a.rel })),
@@ -141,6 +178,19 @@ const browser = await chromium.launch({ executablePath: CHROME, headless: true }
   const aboutTop = await page.evaluate(() => document.getElementById("about").getBoundingClientRect().top);
   ok("menu link closes menu and reaches its section", !(await navVisible()) && Math.abs(aboutTop) < 120, `#about top at ${Math.round(aboutTop)}px`);
   await ctx.close();
+}
+
+// ---------------------------------------------------------- reduced motion --
+{
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: "reduce" });
+  await page.goto(URL, { waitUntil: "load" });
+  await page.waitForTimeout(600);
+  const lenis = await page.evaluate(() => document.documentElement.classList.contains("lenis"));
+  await page.click("text=Explore the websites");
+  await settle(page);
+  const top = await page.evaluate(() => document.getElementById("work").getBoundingClientRect().top);
+  ok("reduced motion: no smooth scrolling, anchors still land", !lenis && top > 0 && top < 120, `lenis=${lenis}, #work top ${Math.round(top)}px`);
+  await page.close();
 }
 
 // ------------------------------------------------------ throttled phone --

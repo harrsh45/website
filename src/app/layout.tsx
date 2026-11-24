@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist } from "next/font/google";
 import { site } from "@/data/site";
 import "@/vendor/scrollcraft/scrollcraft.css";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 // Display face: optical sizing only (the SOFT axis roughly doubled the file for a
