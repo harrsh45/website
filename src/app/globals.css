@@ -369,6 +369,60 @@ html.lamp-armed .desk__phone--right .veil { animation-delay: 1.44s; }
 .compact { display: grid; gap: 1.4rem; }
 .compact__stage { --cone-h: clamp(48px, 6vw, 96px); padding-top: var(--cone-h); position: relative; }
 .compact__frame { position: relative; }
+/* A client's video testimonial. On the feature piece it fills the space beside the
+   label; anywhere else it takes its own row under the label. */
+.testimony {
+  grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.75rem); align-items: center; margin: 0;
+}
+@media (min-width: 861px) {
+  .piece--feature.piece--testimony .piece__label { grid-column: 1 / span 6; align-self: start; }
+  .piece--feature .testimony { grid-column: 7 / span 6; }
+}
+.testimony__stage { --cone-h: clamp(44px, 5vw, 84px); position: relative; padding-top: var(--cone-h); }
+.testimony__stage .cone { bottom: calc(100% - var(--cone-h) - 1px); width: 112%; }
+.testimony__stage .pool { top: 96%; }
+.tvideo {
+  position: relative; z-index: 1; border: 5px solid #24395a; border-radius: 20px; overflow: hidden; background: var(--navy-deep);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.3), 0 28px 50px -16px rgb(0 0 0 / 0.7);
+}
+.tvideo video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; background: #0f1c30; border-radius: 15px; }
+.tvideo video::cue { font-size: 0.8rem; line-height: 1.35; background: rgb(10 19 34 / 0.72); }
+.tvideo__play {
+  position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  gap: 0.6rem; padding: 1rem 0.75rem 1.15rem; border: 0; border-radius: 15px; cursor: pointer; font: inherit; color: var(--paper);
+  background: linear-gradient(to top, rgb(10 19 34 / 0.78), rgb(10 19 34 / 0) 48%);
+}
+.tvideo__icon {
+  display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: var(--amber); color: var(--navy);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 10px 22px -8px rgb(0 0 0 / 0.65); transition: transform 180ms var(--sc-ease-out), background-color 180ms;
+}
+.tvideo__icon svg { width: 22px; height: 22px; margin-left: 3px; }
+.tvideo__text { font-size: 0.86rem; font-weight: 600; letter-spacing: 0.02em; }
+.tvideo__play:focus-visible { outline: 2px solid var(--amber); outline-offset: -6px; }
+@media (hover: hover) and (pointer: fine) { .tvideo__play:hover .tvideo__icon { transform: scale(1.06); background: var(--amber-hover); } }
+.tvideo__play:active .tvideo__icon { transform: scale(0.97); }
+.testimony__words { display: grid; gap: 0.85rem; align-content: center; }
+.testimony__words .eyebrow { color: var(--cream); }
+.testimony__quote { margin: 0; }
+.testimony__quote p { text-wrap: balance; }
+.testimony__by { font-size: 0.92rem; color: var(--sc-ink-soft); }
+.testimony__by strong { color: var(--sc-ink); font-weight: 600; }
+.testimony__transcript summary {
+  display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; font-size: 0.92rem; color: var(--sc-ink);
+  text-decoration: underline; text-decoration-color: rgb(244 243 240 / 0.4); text-underline-offset: 0.2em;
+}
+.testimony__transcript p { font-size: 0.92rem; line-height: 1.62; color: var(--sc-ink-soft); max-width: 46ch; text-wrap: pretty; }
+@media (max-width: 860px) {
+  .testimony { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); margin-top: 1rem; }
+  .testimony__stage { width: 100%; max-width: 270px; }
+  .testimony__stage .cone { width: 100%; }
+}
+@media (max-width: 480px) {
+  .testimony { grid-template-columns: minmax(0, 1fr); }
+  .testimony__stage { width: min(72%, 260px); }
+}
+
 .compact .label__desc { font-size: 0.97rem; }
 @media (max-width: 720px) {
   .more__grid { grid-template-columns: minmax(0, 1fr); }

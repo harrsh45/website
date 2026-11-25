@@ -52,8 +52,11 @@ here was guessed or filled in on your behalf.
 
 - [ ] **A founder photo.** The About section is type-led because none was supplied.
   Drop a real photo in and it can replace the logo tile there.
-- [ ] **A short quote from Sarah**, with her permission. Never use reviews from the
-  preview businesses' own sites.
+- [x] **A short quote from Sarah.** Added 25 Nov from the video testimonial she
+  recorded (beside her project in Work, with captions and a transcript). Before
+  launch: confirm she's happy for it to be public, and play it once to check the
+  captions in `public/video/sarah-testimonial.vtt` (made by machine transcription,
+  then corrected). Never use reviews from the preview businesses' own sites.
 - [ ] **Direct DM link.** `https://ig.me/m/the.lumen.desk` opens a message thread
   directly in many cases. If you test it and like it, swap it into the "Message on
   Instagram" buttons via `src/data/site.ts`.

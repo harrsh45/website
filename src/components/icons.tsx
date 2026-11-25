@@ -57,3 +57,9 @@ export const Close = (p: P) => (
     <path d="M6 6l12 12M18 6 6 18" />
   </svg>
 );
+
+export const Play = (p: P) => (
+  <svg {...base} fill="currentColor" strokeWidth={1.5} {...p}>
+    <path d="M8 5.5v13a.6.6 0 0 0 .9.5l10.2-6.5a.6.6 0 0 0 0-1L8.9 5a.6.6 0 0 0-.9.5Z" />
+  </svg>
+);

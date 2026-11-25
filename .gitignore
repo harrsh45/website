@@ -26,3 +26,7 @@ next-env.d.ts
 # verification screenshots (regenerate with the scrollcraft harness)
 /scrollcraft/lab/
 /scrollcraft/builds/*/lab/
+
+# raw source footage (186MB; keep local)
+/*.mov
+/out-ig/

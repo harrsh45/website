@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { hostOf, type Project } from "@/data/projects";
 import { ArrowUpRight, Lock } from "./icons";
+import TestimonialVideo from "./TestimonialVideo";
 
 export type PieceLayout = "feature" | "left" | "right" | "wide";
 
@@ -112,10 +113,43 @@ export function PhoneFrame({
   );
 }
 
+/** The client's own video and words, under the same lamp as their website. */
+function Testimony({ project }: { project: Project }) {
+  const t = project.testimonial;
+  if (!t) return null;
+  return (
+    <figure className="testimony" aria-label={`Testimonial from ${t.name}, ${project.title}`}>
+      <div className="testimony__stage" data-lamp>
+        <span className="cone" aria-hidden="true" />
+        <span className="pool" aria-hidden="true" />
+        <TestimonialVideo testimonial={t} />
+      </div>
+      <figcaption className="testimony__words" data-sc-in>
+        <p className="eyebrow">In {t.name}&rsquo;s own words</p>
+        <blockquote className="testimony__quote">
+          <p className="display display--md">&ldquo;{t.quote}&rdquo;</p>
+        </blockquote>
+        <p className="testimony__by">
+          <strong>{t.name}</strong>, {project.title}
+        </p>
+        <details className="testimony__transcript">
+          <summary>Read the full transcript</summary>
+          <p>{t.transcript}</p>
+        </details>
+      </figcaption>
+    </figure>
+  );
+}
+
 /** A featured project: desktop and phone captures under the lamp, label alongside. */
 export function ProjectPiece({ project, layout }: { project: Project; layout: PieceLayout }) {
+  const testimony = project.status === "client" && project.testimonial ? " piece--testimony" : "";
   return (
-    <li id={`work-${project.slug}`} className={`piece piece--${layout}`} aria-labelledby={`${project.slug}-title`}>
+    <li
+      id={`work-${project.slug}`}
+      className={`piece piece--${layout}${testimony}`}
+      aria-labelledby={`${project.slug}-title`}
+    >
       <div className="piece__stage" data-lamp>
         <div className="piece__browser">
           <span className="cone" aria-hidden="true" />
@@ -129,6 +163,7 @@ export function ProjectPiece({ project, layout }: { project: Project; layout: Pi
       <div className="piece__label" data-sc-in>
         <Label project={project} />
       </div>
+      {testimony && <Testimony project={project} />}
     </li>
   );
 }

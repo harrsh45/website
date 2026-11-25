@@ -44,8 +44,26 @@ export type Project = {
   /** Founder has confirmed permission to publish this project's screenshots/branding. */
   rightsCleared: boolean;
   lastChecked: string;
+  /**
+   * A real video testimonial the client recorded. Only for `status: "client"`.
+   * `quote` and `transcript` must be the client's own words, word for word, from
+   * the video (the captions file is the timed version of the same transcript).
+   */
+  testimonial?: Testimonial;
   /** Internal notes. Never rendered. */
   notes?: string;
+};
+
+export type Testimonial = {
+  /** Who is speaking, as they introduce themselves in the video. */
+  name: string;
+  /** The line pulled out beside the video: an exact sentence from it. */
+  quote: string;
+  /** Everything said in the video, for people who can't or won't play it. */
+  transcript: string;
+  video: { src: string; poster: string; captions: string; width: number; height: number };
+  /** Spoken length shown on the play button, e.g. "30 sec". */
+  duration: string;
 };
 
 const CHECKED = "2026-11-22";
@@ -76,8 +94,22 @@ export const projects: Project[] = [
     available: true,
     rightsCleared: false,
     lastChecked: CHECKED,
+    testimonial: {
+      name: "Sarah",
+      quote: "He was very friendly and easy to communicate with.",
+      transcript:
+        "Hello, my name is Sarah. I worked with Harsh to create my website for Sarah Ollivierre Beauty. He was very organised in helping me to send over all of my information for the website. He used Google Drive, which helped me within my busy diary to make sure that all the information was sent over to him. Thank you very much, Harsh. He was very friendly and easy to communicate with.",
+      video: {
+        src: "/video/sarah-testimonial.mp4",
+        poster: "/video/sarah-testimonial-poster.jpg",
+        captions: "/video/sarah-testimonial.vtt",
+        width: 720,
+        height: 1280,
+      },
+      duration: "30 sec",
+    },
     notes:
-      "Completed, paid UK client website. Custom domain verified live on 2026-11-22. Confirm the client is happy to be shown publicly. No results or testimonial claims.",
+      "Completed, paid UK client website. Custom domain verified live on 2026-11-22. Confirm the client is happy to be shown publicly. Video testimonial recorded by Sarah on 2026-11-23 (source: Sarah Testimony.mov, kept out of git); transcript made locally with Whisper and corrected for the business name. No results claims.",
   },
   {
     slug: "bels-beauty-studio",
